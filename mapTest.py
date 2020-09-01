@@ -49,10 +49,9 @@ def get_mapdata():
 		#print(rowStr)
 	return vals
 
-def create_map(bg, mouse_x, mouse_y):
+def create_map(bg, mouse_x, mouse_y, mapVals):
 	bg.fill(WHITE)
 	SQUARE_SIZE = 20
-	mapVals = get_mapdata()
 	
 	mapArray_x = -((-1 * mouse_x) // SQUARE_SIZE)
 	mapArray_y = -((-1 * mouse_y) // SQUARE_SIZE)
@@ -95,13 +94,16 @@ def main():
 	clock = pygame.time.Clock()
 	former_mouseX = 0
 	former_mouseY = 0
+
+	mapVals = get_mapdata()
+
 	while True:
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				pygame.quit()
 				sys.exit()
 		
-		create_map(screen, former_mouseX, former_mouseY)
+		create_map(screen, former_mouseX, former_mouseY, mapVals)
 			
 		mouseX, mouseY = pygame.mouse.get_rel()
 		mBtn1, mBtn2, mBtn3 = pygame.mouse.get_pressed()
@@ -120,7 +122,7 @@ def main():
 			former_mouseX = mouseX
 			former_mouseY = mouseY
 			# create map
-			create_map(screen, mouseX, mouseY)
+			create_map(screen, mouseX, mouseY, mapVals)
 		
 		pygame.display.update()
 		clock.tick(10)
